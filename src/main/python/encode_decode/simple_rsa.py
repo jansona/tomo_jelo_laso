@@ -2,6 +2,9 @@ import random
 
 
 class RSA(object):
+
+    def __init__(self):
+        self.n, self.e, self.d = None, None, None
     
     def generate_key(self, width, seed=None):
         """
@@ -54,25 +57,27 @@ class RSA(object):
         l = (p - 1) * (q - 1)  # calculate totient function
         d = modinv(e, l)
 
-        return int(n), int(e), int(d)
+        self.n, self.e, self.d = int(n), int(e), int(d)
 
-    def encrypt(self, data, e, n):
-        return pow(int(data), int(e), int(n))
+        return self.n, self.e, self.d
 
-    def decrypt(self, data, d, n):
-        return pow(int(data), int(d), int(n))
+    def encrypt(self, data):
+        return pow(int(data), int(self.e), int(self.n))
+
+    def decrypt(self, data):
+        return pow(int(data), int(self.d), int(self.n))
 
 
 if __name__ == "__main__":
     rsa = RSA()
-    n, e, d = rsa.generate_key(16)
-    data = 25
-    encrypted = pow(data, e, n)
-    decrypted = pow(encrypted, d, n)
-    print("n:", n)
-    print("e:", e)
-    print("d:", d)
-    print("data:", data)
+    N, E, D = rsa.generate_key(16)
+    test_data = 25
+    encrypted = pow(test_data, E, N)
+    decrypted = pow(encrypted, D, N)
+    print("n:", N)
+    print("e:", E)
+    print("d:", D)
+    print("data:", test_data)
     print("encrypted:", encrypted)
     print("decrypted:", decrypted)
-    assert decrypted == data
+    assert decrypted == test_data

@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(420, 242)
+        MainWindow.resize(420, 254)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
@@ -42,18 +42,20 @@ class Ui_MainWindow(object):
 
         self.e_lineEdit = QLineEdit(self.key_tab)
         self.e_lineEdit.setObjectName(u"e_lineEdit")
+        self.e_lineEdit.setReadOnly(True)
 
         self.gridLayout.addWidget(self.e_lineEdit, 1, 1, 1, 1)
 
         self.d_lineEdit = QLineEdit(self.key_tab)
         self.d_lineEdit.setObjectName(u"d_lineEdit")
+        self.d_lineEdit.setReadOnly(True)
 
         self.gridLayout.addWidget(self.d_lineEdit, 3, 1, 1, 1)
 
-        self.secret_visiable_chBox = QCheckBox(self.key_tab)
-        self.secret_visiable_chBox.setObjectName(u"secret_visiable_chBox")
+        self.secretVisiable_chBox = QCheckBox(self.key_tab)
+        self.secretVisiable_chBox.setObjectName(u"secretVisiable_chBox")
 
-        self.gridLayout.addWidget(self.secret_visiable_chBox, 4, 1, 1, 1)
+        self.gridLayout.addWidget(self.secretVisiable_chBox, 4, 1, 1, 1)
 
         self.e_label = QLabel(self.key_tab)
         self.e_label.setObjectName(u"e_label")
@@ -62,6 +64,7 @@ class Ui_MainWindow(object):
 
         self.n_lineEdit = QLineEdit(self.key_tab)
         self.n_lineEdit.setObjectName(u"n_lineEdit")
+        self.n_lineEdit.setReadOnly(True)
 
         self.gridLayout.addWidget(self.n_lineEdit, 0, 1, 1, 1)
 
@@ -82,10 +85,10 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.gridLayout)
 
-        self.pushButton = QPushButton(self.key_tab)
-        self.pushButton.setObjectName(u"pushButton")
+        self.generate_pushBtn = QPushButton(self.key_tab)
+        self.generate_pushBtn.setObjectName(u"generate_pushBtn")
 
-        self.verticalLayout.addWidget(self.pushButton)
+        self.verticalLayout.addWidget(self.generate_pushBtn)
 
         self.tabWidget.addTab(self.key_tab, "")
         self.code_tab = QWidget()
@@ -109,20 +112,20 @@ class Ui_MainWindow(object):
 
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
-        self.n_label_2 = QLabel(self.code_tab)
-        self.n_label_2.setObjectName(u"n_label_2")
+        self.n_process_label = QLabel(self.code_tab)
+        self.n_process_label.setObjectName(u"n_process_label")
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.n_label_2)
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.n_process_label)
 
         self.key_label = QLabel(self.code_tab)
         self.key_label.setObjectName(u"key_label")
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.key_label)
 
-        self.n_lineEdit_2 = QLineEdit(self.code_tab)
-        self.n_lineEdit_2.setObjectName(u"n_lineEdit_2")
+        self.n_process_lineEdit = QLineEdit(self.code_tab)
+        self.n_process_lineEdit.setObjectName(u"n_process_lineEdit")
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.n_lineEdit_2)
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.n_process_lineEdit)
 
         self.key_lineEdit = QLineEdit(self.code_tab)
         self.key_lineEdit.setObjectName(u"key_lineEdit")
@@ -132,27 +135,38 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addLayout(self.formLayout)
 
-        self.horizontalLayout = QHBoxLayout()
+        self.ratioBtnGrp_horizontalLayout = QHBoxLayout()
+        self.ratioBtnGrp_horizontalLayout.setObjectName(u"ratioBtnGrp_horizontalLayout")
+
+        self.verticalLayout_3.addLayout(self.ratioBtnGrp_horizontalLayout)
+
+        self.ratio_groupBox = QGroupBox(self.code_tab)
+        self.ratio_groupBox.setObjectName(u"ratio_groupBox")
+        self.horizontalLayout = QHBoxLayout(self.ratio_groupBox)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.encode_ratioBtn = QRadioButton(self.code_tab)
+        self.encode_ratioBtn = QRadioButton(self.ratio_groupBox)
+        self.processTypeRatio_buttonGroup = QButtonGroup(MainWindow)
+        self.processTypeRatio_buttonGroup.setObjectName(u"processTypeRatio_buttonGroup")
+        self.processTypeRatio_buttonGroup.addButton(self.encode_ratioBtn)
         self.encode_ratioBtn.setObjectName(u"encode_ratioBtn")
         self.encode_ratioBtn.setEnabled(True)
         self.encode_ratioBtn.setChecked(True)
 
         self.horizontalLayout.addWidget(self.encode_ratioBtn)
 
-        self.decode_ratioBtn = QRadioButton(self.code_tab)
+        self.decode_ratioBtn = QRadioButton(self.ratio_groupBox)
+        self.processTypeRatio_buttonGroup.addButton(self.decode_ratioBtn)
         self.decode_ratioBtn.setObjectName(u"decode_ratioBtn")
 
         self.horizontalLayout.addWidget(self.decode_ratioBtn)
 
 
-        self.verticalLayout_3.addLayout(self.horizontalLayout)
+        self.verticalLayout_3.addWidget(self.ratio_groupBox)
 
-        self.pushButton_2 = QPushButton(self.code_tab)
-        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.process_pushBtn = QPushButton(self.code_tab)
+        self.process_pushBtn.setObjectName(u"process_pushBtn")
 
-        self.verticalLayout_3.addWidget(self.pushButton_2)
+        self.verticalLayout_3.addWidget(self.process_pushBtn)
 
         self.tabWidget.addTab(self.code_tab, "")
 
@@ -186,16 +200,17 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"tomo jelo laso", None))
         self.d_label.setText(QCoreApplication.translate("MainWindow", u"Secret Key D:", None))
         self.n_label.setText(QCoreApplication.translate("MainWindow", u"Public Number N:", None))
-        self.secret_visiable_chBox.setText(QCoreApplication.translate("MainWindow", u"secret key visiable", None))
+        self.secretVisiable_chBox.setText(QCoreApplication.translate("MainWindow", u"secret key visiable", None))
         self.e_label.setText(QCoreApplication.translate("MainWindow", u"Public Key E:", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"GENERATE", None))
+        self.generate_pushBtn.setText(QCoreApplication.translate("MainWindow", u"GENERATE", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.key_tab), QCoreApplication.translate("MainWindow", u"key generation", None))
         self.openFile_ToolBtn.setText(QCoreApplication.translate("MainWindow", u"...", None))
-        self.n_label_2.setText(QCoreApplication.translate("MainWindow", u"Public Number N:", None))
+        self.n_process_label.setText(QCoreApplication.translate("MainWindow", u"Public Number N:", None))
         self.key_label.setText(QCoreApplication.translate("MainWindow", u"Public Key E:", None))
+        self.ratio_groupBox.setTitle("")
         self.encode_ratioBtn.setText(QCoreApplication.translate("MainWindow", u"encode", None))
         self.decode_ratioBtn.setText(QCoreApplication.translate("MainWindow", u"decode", None))
-        self.pushButton_2.setText(QCoreApplication.translate("MainWindow", u"PROCESS", None))
+        self.process_pushBtn.setText(QCoreApplication.translate("MainWindow", u"PROCESS", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.code_tab), QCoreApplication.translate("MainWindow", u"encode/decode", None))
         self.menuhelp.setTitle(QCoreApplication.translate("MainWindow", u"help", None))
         self.menuabout.setTitle(QCoreApplication.translate("MainWindow", u"about", None))

@@ -6,8 +6,12 @@ from gui.MainWindow import MainWindow
 from gui.ui_main import Ui_MainWindow
 from encode_decode.simple_rsa import RSA
 
+
+BIT_WIDTH = 8
+SUFFIX_NAME = ".tjl"
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = MainWindow()
+    ex = MainWindow(BIT_WIDTH, SUFFIX_NAME)
     ex.show()
     app.exec_()
