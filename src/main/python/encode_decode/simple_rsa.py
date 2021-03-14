@@ -56,18 +56,23 @@ class RSA(object):
 
         return int(n), int(e), int(d)
 
-    def encrypt(data, e, n):
+    def encrypt(self, data, e, n):
         return pow(int(data), int(e), int(n))
 
-    def decrypt(data, d, n):
+    def decrypt(self, data, d, n):
         return pow(int(data), int(d), int(n))
 
 
 if __name__ == "__main__":
     rsa = RSA()
-    n,e,d = rsa.generate_key(16)
-    data = 25566
-    encrypted = pow(data,e,n)
-    print(encrypted)
-    decrypted = pow(encrypted,d,n)
+    n, e, d = rsa.generate_key(16)
+    data = 25
+    encrypted = pow(data, e, n)
+    decrypted = pow(encrypted, d, n)
+    print("n:", n)
+    print("e:", e)
+    print("d:", d)
+    print("data:", data)
+    print("encrypted:", encrypted)
+    print("decrypted:", decrypted)
     assert decrypted == data
