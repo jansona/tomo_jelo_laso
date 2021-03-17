@@ -9,7 +9,7 @@ BIT_WIDTH = 16
 SUFFIX_NAME = ".tjl"
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
+    appctxt = ApplicationContext()
     ex = MainWindow(BIT_WIDTH, SUFFIX_NAME)
     ex.show()
-    app.exec_()
+    sys.exit(appctxt.app.exec_())
