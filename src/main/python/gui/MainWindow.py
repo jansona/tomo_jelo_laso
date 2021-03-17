@@ -32,7 +32,7 @@ class MainWindow(QMainWindow):
 
     def show_keys(self):
 
-        if self.rsa.n is not None:
+        if self.rsa.n is not None and self.rsa.e is not None:
             self.ui.n_lineEdit.setText(str(self.rsa.n))
 
         if self.rsa.e is not None:
@@ -62,10 +62,10 @@ class MainWindow(QMainWindow):
         else:
             key_missing_message = "Please input the secret key d."
 
-        for content, critical_messsage in [(source_file_path, "Please input/select the valid path of file."),
-                                  (n_process_content, "Please input the public number n."),
-                                  (key_content, key_missing_message)]:
-            if not handle_content_missing(content, critical_messsage):
+        for content, message in [(source_file_path, "Please input/select the valid path of file."),
+                                 (n_process_content, "Please input the public number n."),
+                                 (key_content, key_missing_message)]:
+            if not handle_content_missing(content, message):
                 return
 
         # check the input is valid
@@ -78,7 +78,7 @@ class MainWindow(QMainWindow):
         # process
         if self.ui.processTypeRatio_buttonGroup.checkedButton().text() == "encode":
             target_file_path = source_file_path + self.suffix_name
-            conduct_file_encoded(source_file_path, target_file_path, key, n_process, self.bit_width)
+            conduct_file_encoded(source_file_path, target_file_path, key, n_process, self.bit_width // 2)
         else:
             target_file_path = ".".join(source_file_path.split(".")[:-1])
             conduct_file_decoded(source_file_path, target_file_path, key, n_process, self.bit_width)
