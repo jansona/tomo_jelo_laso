@@ -1,3 +1,7 @@
+import os
+from math import ceil
+
+
 def encrypt(data, e, n):
     return pow(int(data), e, n)
 
@@ -6,34 +10,38 @@ def decrypt(data, d, n):
     return pow(int(data), int(d), int(n))
 
 
-def conduct_file_encoded(source_file_path, target_file_path, e, n, read_bit_width):
+def conduct_file_processed(source_file_path, target_file_path, e_or_d, n, read_bit_width, does_encrypt, signal):
     byte_width = int(read_bit_width / 8)
+
+    file_size = os.path.getsize(source_file_path)
 
     with open(source_file_path, "rb") as fin:
         with open(target_file_path, "wb+") as fout:
+            duration = ceil(file_size / 10)
+            count = 0
+            sub_count = 0
             while True:
+
+                count += byte_width
+                sub_count += byte_width
+                if sub_count >= duration:
+                    sub_count = 0
+                    print("{:.1f}%".format(count / file_size * 100))
+                    signal.emit(count / file_size)
+
                 b = fin.read(byte_width)
                 if b == b'':
                     break
                 else:
                     data_int = int().from_bytes(b, "big")
-                data_encoded_int = encrypt(data_int, e, n)
-                fout.write(data_encoded_int.to_bytes(byte_width * 2, "big"))
-
-
-def conduct_file_decoded(source_file_path, target_file_path, d, n, read_bit_width):
-    byte_width = int(read_bit_width / 8)
-
-    with open(source_file_path, "rb") as fin:
-        with open(target_file_path, "wb+") as fout:
-            while True:
-                b = fin.read(byte_width)
-                if b == b'':
-                    break
+                if does_encrypt:
+                    data_encoded_int = encrypt(data_int, e_or_d, n)
+                    fout.write(data_encoded_int.to_bytes(byte_width * 2, "big"))
                 else:
-                    data_int = int().from_bytes(b, "big")
-                data_decoded_int = decrypt(data_int, d, n)
-                fout.write(data_decoded_int.to_bytes(byte_width // 2, "big"))
+                    data_decoded_int = decrypt(data_int, e_or_d, n)
+                    fout.write(data_decoded_int.to_bytes(byte_width // 2, "big"))
+
+    signal.emit(-1)
 
 
 def read_write_byte(source_file_path, target_file_path, bit_width, n, e, d):
@@ -53,8 +61,11 @@ def read_write_byte(source_file_path, target_file_path, bit_width, n, e, d):
 
 
 if __name__ == "__main__":
-    conduct_file_encoded("D:/test.txt", "D:/test.txt.tjl", 35317, 35621, 8)
-    conduct_file_decoded("D:/test.txt.tjl", "D:/final.txt", 18829, 35621, 16)
+    # conduct_file_processed("D:/test.txt", "D:/test.txt.tjl", 35317, 35621, 8, True)
+    # conduct_file_processed("D:/test.txt.tjl", "D:/final.txt", 18829, 35621, 16, False)
+
+    conduct_file_processed("D:/test.png", "D:/test.png.tjl", 35317, 35621, 8, True)
+    conduct_file_processed("D:/test.png.tjl", "D:/final.png", 18829, 35621, 16, False)
 
     # conduct_file_encoded("D:/test.txt", "D:/test.txt.tjl", 193, 143, 8)
     # conduct_file_decoded("D:/test.txt.tjl", "D:/final.txt", 97, 143, 8)

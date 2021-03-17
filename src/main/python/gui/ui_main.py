@@ -30,57 +30,46 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
-        self.d_label = QLabel(self.key_tab)
-        self.d_label.setObjectName(u"d_label")
+        self.secretKey_lineEdit = QLineEdit(self.key_tab)
+        self.secretKey_lineEdit.setObjectName(u"secretKey_lineEdit")
+        self.secretKey_lineEdit.setReadOnly(True)
 
-        self.gridLayout.addWidget(self.d_label, 3, 0, 1, 1)
-
-        self.n_label = QLabel(self.key_tab)
-        self.n_label.setObjectName(u"n_label")
-
-        self.gridLayout.addWidget(self.n_label, 0, 0, 1, 1)
-
-        self.e_lineEdit = QLineEdit(self.key_tab)
-        self.e_lineEdit.setObjectName(u"e_lineEdit")
-        self.e_lineEdit.setReadOnly(True)
-
-        self.gridLayout.addWidget(self.e_lineEdit, 1, 1, 1, 1)
-
-        self.d_lineEdit = QLineEdit(self.key_tab)
-        self.d_lineEdit.setObjectName(u"d_lineEdit")
-        self.d_lineEdit.setReadOnly(True)
-
-        self.gridLayout.addWidget(self.d_lineEdit, 3, 1, 1, 1)
+        self.gridLayout.addWidget(self.secretKey_lineEdit, 2, 1, 1, 1)
 
         self.secretVisiable_chBox = QCheckBox(self.key_tab)
         self.secretVisiable_chBox.setObjectName(u"secretVisiable_chBox")
 
-        self.gridLayout.addWidget(self.secretVisiable_chBox, 4, 1, 1, 1)
+        self.gridLayout.addWidget(self.secretVisiable_chBox, 3, 1, 1, 1)
 
-        self.e_label = QLabel(self.key_tab)
-        self.e_label.setObjectName(u"e_label")
+        self.publicKey_lineEdit = QLineEdit(self.key_tab)
+        self.publicKey_lineEdit.setObjectName(u"publicKey_lineEdit")
+        self.publicKey_lineEdit.setReadOnly(True)
 
-        self.gridLayout.addWidget(self.e_label, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.publicKey_lineEdit, 0, 1, 1, 1)
 
-        self.n_lineEdit = QLineEdit(self.key_tab)
-        self.n_lineEdit.setObjectName(u"n_lineEdit")
-        self.n_lineEdit.setReadOnly(True)
+        self.secretKey_label = QLabel(self.key_tab)
+        self.secretKey_label.setObjectName(u"secretKey_label")
 
-        self.gridLayout.addWidget(self.n_lineEdit, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.secretKey_label, 2, 0, 1, 1)
 
         self.line = QFrame(self.key_tab)
         self.line.setObjectName(u"line")
         self.line.setFrameShape(QFrame.HLine)
         self.line.setFrameShadow(QFrame.Sunken)
 
-        self.gridLayout.addWidget(self.line, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.line, 1, 1, 1, 1)
 
         self.line_2 = QFrame(self.key_tab)
         self.line_2.setObjectName(u"line_2")
         self.line_2.setFrameShape(QFrame.HLine)
         self.line_2.setFrameShadow(QFrame.Sunken)
 
-        self.gridLayout.addWidget(self.line_2, 2, 0, 1, 1)
+        self.gridLayout.addWidget(self.line_2, 1, 0, 1, 1)
+
+        self.publicKey_label = QLabel(self.key_tab)
+        self.publicKey_label.setObjectName(u"publicKey_label")
+
+        self.gridLayout.addWidget(self.publicKey_label, 0, 0, 1, 1)
 
 
         self.verticalLayout.addLayout(self.gridLayout)
@@ -102,63 +91,48 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_2.addWidget(self.filePath_lineEdit)
 
-        self.openFile_ToolBtn = QToolButton(self.code_tab)
-        self.openFile_ToolBtn.setObjectName(u"openFile_ToolBtn")
+        self.openFile_toolBtn = QToolButton(self.code_tab)
+        self.openFile_toolBtn.setObjectName(u"openFile_toolBtn")
 
-        self.horizontalLayout_2.addWidget(self.openFile_ToolBtn)
+        self.horizontalLayout_2.addWidget(self.openFile_toolBtn)
 
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
 
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
-        self.n_process_label = QLabel(self.code_tab)
-        self.n_process_label.setObjectName(u"n_process_label")
-
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.n_process_label)
-
         self.key_label = QLabel(self.code_tab)
         self.key_label.setObjectName(u"key_label")
 
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.key_label)
-
-        self.n_process_lineEdit = QLineEdit(self.code_tab)
-        self.n_process_lineEdit.setObjectName(u"n_process_lineEdit")
-
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.n_process_lineEdit)
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.key_label)
 
         self.key_lineEdit = QLineEdit(self.code_tab)
         self.key_lineEdit.setObjectName(u"key_lineEdit")
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.key_lineEdit)
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.key_lineEdit)
 
 
         self.verticalLayout_3.addLayout(self.formLayout)
-
-        self.ratioBtnGrp_horizontalLayout = QHBoxLayout()
-        self.ratioBtnGrp_horizontalLayout.setObjectName(u"ratioBtnGrp_horizontalLayout")
-
-        self.verticalLayout_3.addLayout(self.ratioBtnGrp_horizontalLayout)
 
         self.ratio_groupBox = QGroupBox(self.code_tab)
         self.ratio_groupBox.setObjectName(u"ratio_groupBox")
         self.horizontalLayout = QHBoxLayout(self.ratio_groupBox)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.encode_ratioBtn = QRadioButton(self.ratio_groupBox)
+        self.encrypt_ratioBtn = QRadioButton(self.ratio_groupBox)
         self.processTypeRatio_buttonGroup = QButtonGroup(MainWindow)
         self.processTypeRatio_buttonGroup.setObjectName(u"processTypeRatio_buttonGroup")
-        self.processTypeRatio_buttonGroup.addButton(self.encode_ratioBtn)
-        self.encode_ratioBtn.setObjectName(u"encode_ratioBtn")
-        self.encode_ratioBtn.setEnabled(True)
-        self.encode_ratioBtn.setChecked(True)
+        self.processTypeRatio_buttonGroup.addButton(self.encrypt_ratioBtn)
+        self.encrypt_ratioBtn.setObjectName(u"encrypt_ratioBtn")
+        self.encrypt_ratioBtn.setEnabled(True)
+        self.encrypt_ratioBtn.setChecked(True)
 
-        self.horizontalLayout.addWidget(self.encode_ratioBtn)
+        self.horizontalLayout.addWidget(self.encrypt_ratioBtn)
 
-        self.decode_ratioBtn = QRadioButton(self.ratio_groupBox)
-        self.processTypeRatio_buttonGroup.addButton(self.decode_ratioBtn)
-        self.decode_ratioBtn.setObjectName(u"decode_ratioBtn")
+        self.decrypt_ratioBtn = QRadioButton(self.ratio_groupBox)
+        self.processTypeRatio_buttonGroup.addButton(self.decrypt_ratioBtn)
+        self.decrypt_ratioBtn.setObjectName(u"decrypt_ratioBtn")
 
-        self.horizontalLayout.addWidget(self.decode_ratioBtn)
+        self.horizontalLayout.addWidget(self.decrypt_ratioBtn)
 
 
         self.verticalLayout_3.addWidget(self.ratio_groupBox)
@@ -198,20 +172,18 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"tomo jelo laso", None))
-        self.d_label.setText(QCoreApplication.translate("MainWindow", u"Secret Key D:", None))
-        self.n_label.setText(QCoreApplication.translate("MainWindow", u"Public Number N:", None))
         self.secretVisiable_chBox.setText(QCoreApplication.translate("MainWindow", u"secret key visiable", None))
-        self.e_label.setText(QCoreApplication.translate("MainWindow", u"Public Key E:", None))
+        self.secretKey_label.setText(QCoreApplication.translate("MainWindow", u"Secret Key:", None))
+        self.publicKey_label.setText(QCoreApplication.translate("MainWindow", u"Public Key:", None))
         self.generate_pushBtn.setText(QCoreApplication.translate("MainWindow", u"GENERATE", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.key_tab), QCoreApplication.translate("MainWindow", u"key generation", None))
-        self.openFile_ToolBtn.setText(QCoreApplication.translate("MainWindow", u"...", None))
-        self.n_process_label.setText(QCoreApplication.translate("MainWindow", u"Public Number N:", None))
-        self.key_label.setText(QCoreApplication.translate("MainWindow", u"Public Key E:", None))
+        self.openFile_toolBtn.setText(QCoreApplication.translate("MainWindow", u"...", None))
+        self.key_label.setText(QCoreApplication.translate("MainWindow", u"Public Key:", None))
         self.ratio_groupBox.setTitle("")
-        self.encode_ratioBtn.setText(QCoreApplication.translate("MainWindow", u"encode", None))
-        self.decode_ratioBtn.setText(QCoreApplication.translate("MainWindow", u"decode", None))
+        self.encrypt_ratioBtn.setText(QCoreApplication.translate("MainWindow", u"encrypt", None))
+        self.decrypt_ratioBtn.setText(QCoreApplication.translate("MainWindow", u"decrypt", None))
         self.process_pushBtn.setText(QCoreApplication.translate("MainWindow", u"PROCESS", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.code_tab), QCoreApplication.translate("MainWindow", u"encode/decode", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.code_tab), QCoreApplication.translate("MainWindow", u"encrypt/decrypt", None))
         self.menuhelp.setTitle(QCoreApplication.translate("MainWindow", u"help", None))
         self.menuabout.setTitle(QCoreApplication.translate("MainWindow", u"about", None))
     # retranslateUi
