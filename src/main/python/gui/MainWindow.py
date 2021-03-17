@@ -3,7 +3,6 @@ from threading import Thread
 from PySide2 import QtCore
 from PySide2.QtCore import QThread
 from PySide2.QtWidgets import QApplication, QMainWindow, QMessageBox, QFileDialog
-from PySide2.QtUiTools import QUiLoader
 
 import sys, os, base64
 from .ui_main import Ui_MainWindow
