@@ -5,11 +5,11 @@ import sys
 from gui.MainWindow import MainWindow
 
 
-BIT_WIDTH = 16
+KEY_BIT_WIDTH = 16
 SUFFIX_NAME = ".tjl"
 
 if __name__ == '__main__':
     appctxt = ApplicationContext()
-    ex = MainWindow(BIT_WIDTH, SUFFIX_NAME)
+    ex = MainWindow(KEY_BIT_WIDTH, SUFFIX_NAME)
     ex.show()
     sys.exit(appctxt.app.exec_())

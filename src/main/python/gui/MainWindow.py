@@ -12,20 +12,21 @@ from utils.file_processor import conduct_file_processed
 
 class ProcessThread(Thread):
 
-    def __init__(self, source_file_path, target_file_path, e_or_d, n, bit_width, does_encrypt, signal):
+    def __init__(self, source_file_path, target_file_path, e_or_d, n, read_bit_width, write_bit_width, does_encrypt, signal):
         super().__init__()
         self.source_file_path = source_file_path
         self.target_file_path = target_file_path
         self.n = n
         self.e_or_d = e_or_d
-        self.bit_width = bit_width
+        self.read_bit_width = read_bit_width
+        self.write_bit_width = write_bit_width
         self.does_encrypt = does_encrypt
         self.signal = signal
 
     def run(self):
         # 进行任务操作
         conduct_file_processed(self.source_file_path, self.target_file_path,
-                               self.e_or_d, self.n, self.bit_width, self.does_encrypt, self.signal)
+                               self.e_or_d, self.n, self.read_bit_width, self.write_bit_width, self.does_encrypt, self.signal)
 
 
 class MainWindow(QMainWindow):
@@ -46,7 +47,8 @@ class MainWindow(QMainWindow):
         self.ui.secretVisiable_chBox.clicked.connect(self.show_keys)
         self.ui.generate_pushBtn.clicked.connect(self.handle_generate)
 
-        self.ui.openFile_toolBtn.clicked.connect(self.open_file)
+        self.ui.openFromFile_toolBtn.clicked.connect(self.open_from_file)
+        self.ui.openToFile_toolButton.clicked.connect(self.open_to_file)
         self.ui.processTypeRatio_buttonGroup.buttonToggled.connect(self.switch_process_key_label)
         self.ui.process_pushBtn.clicked.connect(self.handle_process)
 
@@ -54,7 +56,8 @@ class MainWindow(QMainWindow):
 
     def handle_generate(self):
 
-        self.rsa.generate_key(self.bit_width)
+        # self.rsa.generate_key(self.bit_width)
+        self.rsa.generate_key_with_rsa(self.bit_width)
         self.show_keys()
 
     def show_keys(self):
@@ -81,7 +84,7 @@ class MainWindow(QMainWindow):
                 return False
             return True
 
-        source_file_path = self.ui.filePath_lineEdit.text()
+        source_file_path = self.ui.fromFilePath_lineEdit.text()
         key_content = self.ui.key_lineEdit.text()
 
         if self.ui.processTypeRatio_buttonGroup.checkedButton().text() == "encode":
@@ -108,28 +111,45 @@ class MainWindow(QMainWindow):
         # process
         if self.ui.processTypeRatio_buttonGroup.checkedButton().text() == "encrypt":
             print("encrypt")
-            target_file_path = source_file_path + self.suffix_name
-            read_bit_width = self.bit_width // 2
+            file_name = os.path.basename(source_file_path)
+            new_file_name = file_name + self.suffix_name
+            target_file_path = os.path.join(self.ui.toFilePath_lineEdit.text(), new_file_name)
+            read_bit_width = 8
+            write_bit_width = self.bit_width
             does_encrypt = True
         else:
             print("decrypt")
-            target_file_path = ".".join(source_file_path.split(".")[:-1])
+            file_name = os.path.basename(source_file_path)
+            raw_file_name = ".".join(file_name.split(".")[:-1])
+            target_file_path = os.path.join(self.ui.toFilePath_lineEdit.text(), raw_file_name)
             read_bit_width = self.bit_width
+            write_bit_width = 8
             does_encrypt = False
 
         process_thread = ProcessThread(source_file_path, target_file_path, e_or_d, n,
-                                       read_bit_width, does_encrypt, self._process_signal)
+                                       read_bit_width, write_bit_width, does_encrypt, self._process_signal)
         process_thread.start()
         self.ui.process_pushBtn.setDisabled(True)
 
-    def open_file(self):
+    def open_from_file(self):
 
         file_dialog = QFileDialog()
         file_dialog.setFileMode(QFileDialog.AnyFile)
         file_dialog.setViewMode(QFileDialog.Detail)
         if file_dialog.exec_():
-            file_names = file_dialog.selectedFiles()
-            self.ui.filePath_lineEdit.setText(file_names[0])
+            file_name = file_dialog.selectedFiles()[0]
+            self.ui.fromFilePath_lineEdit.setText(file_name)
+            folder_path = file_dialog.directory().path()
+            self.ui.toFilePath_lineEdit.setText(folder_path)
+
+    def open_to_file(self):
+
+        file_dialog = QFileDialog()
+        file_dialog.setFileMode(QFileDialog.DirectoryOnly)
+        file_dialog.setViewMode(QFileDialog.Detail)
+        if file_dialog.exec_():
+            folder_path = file_dialog.selectedFiles()[0]
+            self.ui.toFilePath_lineEdit.setText(folder_path)
 
     def switch_process_key_label(self):
 

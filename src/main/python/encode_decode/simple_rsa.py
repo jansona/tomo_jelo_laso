@@ -1,10 +1,19 @@
+# Inspired by https://github.com/keon/algorithms/blob/master/algorithms/maths/rsa.py
 import random
+import rsa
 
 
 class RSA(object):
 
     def __init__(self):
         self.n, self.e, self.d = None, None, None
+
+    def generate_key_with_rsa(self, width):
+
+        p, s = rsa.newkeys(width)
+        self.n = s.n
+        self.e = s.e
+        self.d = s.d
     
     def generate_key(self, width, seed=None):
         """

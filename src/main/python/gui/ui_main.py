@@ -84,40 +84,17 @@ class Ui_MainWindow(object):
         self.code_tab.setObjectName(u"code_tab")
         self.verticalLayout_3 = QVBoxLayout(self.code_tab)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.horizontalLayout_2 = QHBoxLayout()
-        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.filePath_lineEdit = QLineEdit(self.code_tab)
-        self.filePath_lineEdit.setObjectName(u"filePath_lineEdit")
-
-        self.horizontalLayout_2.addWidget(self.filePath_lineEdit)
-
-        self.openFile_toolBtn = QToolButton(self.code_tab)
-        self.openFile_toolBtn.setObjectName(u"openFile_toolBtn")
-
-        self.horizontalLayout_2.addWidget(self.openFile_toolBtn)
-
-
-        self.verticalLayout_3.addLayout(self.horizontalLayout_2)
-
-        self.formLayout = QFormLayout()
-        self.formLayout.setObjectName(u"formLayout")
-        self.key_label = QLabel(self.code_tab)
-        self.key_label.setObjectName(u"key_label")
-
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.key_label)
-
-        self.key_lineEdit = QLineEdit(self.code_tab)
-        self.key_lineEdit.setObjectName(u"key_lineEdit")
-
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.key_lineEdit)
-
-
-        self.verticalLayout_3.addLayout(self.formLayout)
-
         self.ratio_groupBox = QGroupBox(self.code_tab)
         self.ratio_groupBox.setObjectName(u"ratio_groupBox")
+        self.ratio_groupBox.setStyleSheet(u"")
+        self.ratio_groupBox.setFlat(False)
         self.horizontalLayout = QHBoxLayout(self.ratio_groupBox)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.label = QLabel(self.ratio_groupBox)
+        self.label.setObjectName(u"label")
+
+        self.horizontalLayout.addWidget(self.label)
+
         self.encrypt_ratioBtn = QRadioButton(self.ratio_groupBox)
         self.processTypeRatio_buttonGroup = QButtonGroup(MainWindow)
         self.processTypeRatio_buttonGroup.setObjectName(u"processTypeRatio_buttonGroup")
@@ -136,6 +113,61 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_3.addWidget(self.ratio_groupBox)
+
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.from_label = QLabel(self.code_tab)
+        self.from_label.setObjectName(u"from_label")
+
+        self.horizontalLayout_2.addWidget(self.from_label)
+
+        self.fromFilePath_lineEdit = QLineEdit(self.code_tab)
+        self.fromFilePath_lineEdit.setObjectName(u"fromFilePath_lineEdit")
+
+        self.horizontalLayout_2.addWidget(self.fromFilePath_lineEdit)
+
+        self.openFromFile_toolBtn = QToolButton(self.code_tab)
+        self.openFromFile_toolBtn.setObjectName(u"openFromFile_toolBtn")
+
+        self.horizontalLayout_2.addWidget(self.openFromFile_toolBtn)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_2)
+
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.to_label = QLabel(self.code_tab)
+        self.to_label.setObjectName(u"to_label")
+
+        self.horizontalLayout_3.addWidget(self.to_label)
+
+        self.toFilePath_lineEdit = QLineEdit(self.code_tab)
+        self.toFilePath_lineEdit.setObjectName(u"toFilePath_lineEdit")
+
+        self.horizontalLayout_3.addWidget(self.toFilePath_lineEdit)
+
+        self.openToFile_toolButton = QToolButton(self.code_tab)
+        self.openToFile_toolButton.setObjectName(u"openToFile_toolButton")
+
+        self.horizontalLayout_3.addWidget(self.openToFile_toolButton)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_3)
+
+        self.formLayout = QFormLayout()
+        self.formLayout.setObjectName(u"formLayout")
+        self.key_label = QLabel(self.code_tab)
+        self.key_label.setObjectName(u"key_label")
+
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.key_label)
+
+        self.key_lineEdit = QLineEdit(self.code_tab)
+        self.key_lineEdit.setObjectName(u"key_lineEdit")
+
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.key_lineEdit)
+
+
+        self.verticalLayout_3.addLayout(self.formLayout)
 
         self.process_pushBtn = QPushButton(self.code_tab)
         self.process_pushBtn.setObjectName(u"process_pushBtn")
@@ -177,11 +209,15 @@ class Ui_MainWindow(object):
         self.publicKey_label.setText(QCoreApplication.translate("MainWindow", u"Public Key:", None))
         self.generate_pushBtn.setText(QCoreApplication.translate("MainWindow", u"GENERATE", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.key_tab), QCoreApplication.translate("MainWindow", u"key generation", None))
-        self.openFile_toolBtn.setText(QCoreApplication.translate("MainWindow", u"...", None))
-        self.key_label.setText(QCoreApplication.translate("MainWindow", u"Public Key:", None))
         self.ratio_groupBox.setTitle("")
+        self.label.setText(QCoreApplication.translate("MainWindow", u"*Action:", None))
         self.encrypt_ratioBtn.setText(QCoreApplication.translate("MainWindow", u"encrypt", None))
         self.decrypt_ratioBtn.setText(QCoreApplication.translate("MainWindow", u"decrypt", None))
+        self.from_label.setText(QCoreApplication.translate("MainWindow", u"From(File):", None))
+        self.openFromFile_toolBtn.setText(QCoreApplication.translate("MainWindow", u"...", None))
+        self.to_label.setText(QCoreApplication.translate("MainWindow", u"To(Dir):", None))
+        self.openToFile_toolButton.setText(QCoreApplication.translate("MainWindow", u"...", None))
+        self.key_label.setText(QCoreApplication.translate("MainWindow", u"Public Key:", None))
         self.process_pushBtn.setText(QCoreApplication.translate("MainWindow", u"PROCESS", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.code_tab), QCoreApplication.translate("MainWindow", u"encrypt/decrypt", None))
         self.menuhelp.setTitle(QCoreApplication.translate("MainWindow", u"help", None))

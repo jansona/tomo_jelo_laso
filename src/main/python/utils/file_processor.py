@@ -10,36 +10,38 @@ def decrypt(data, d, n):
     return pow(int(data), int(d), int(n))
 
 
-def conduct_file_processed(source_file_path, target_file_path, e_or_d, n, read_bit_width, does_encrypt, signal):
-    byte_width = int(read_bit_width / 8)
+def conduct_file_processed(source_file_path, target_file_path, e_or_d, n, read_bit_width, write_bit_width, does_encrypt, signal):
+    read_byte_width = int(read_bit_width / 8)
+    write_byte_width = int(write_bit_width / 8)
 
     file_size = os.path.getsize(source_file_path)
 
     with open(source_file_path, "rb") as fin:
+
         with open(target_file_path, "wb+") as fout:
             duration = ceil(file_size / 10)
             count = 0
             sub_count = 0
+
             while True:
 
-                count += byte_width
-                sub_count += byte_width
+                count += read_byte_width
+                sub_count += read_byte_width
                 if sub_count >= duration:
                     sub_count = 0
                     print("{:.1f}%".format(count / file_size * 100))
                     signal.emit(count / file_size)
 
-                b = fin.read(byte_width)
+                b = fin.read(read_byte_width)
                 if b == b'':
                     break
                 else:
                     data_int = int().from_bytes(b, "big")
                 if does_encrypt:
-                    data_encoded_int = encrypt(data_int, e_or_d, n)
-                    fout.write(data_encoded_int.to_bytes(byte_width * 2, "big"))
+                    data_processed = encrypt(data_int, e_or_d, n)
                 else:
-                    data_decoded_int = decrypt(data_int, e_or_d, n)
-                    fout.write(data_decoded_int.to_bytes(byte_width // 2, "big"))
+                    data_processed = decrypt(data_int, e_or_d, n)
+                fout.write(data_processed.to_bytes(write_byte_width, "big"))
 
     signal.emit(-1)
 
